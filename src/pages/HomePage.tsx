@@ -26,7 +26,7 @@ const HomePage: FC = () => {
   const [gpa, setGpa] = useState<string>("");
   const [savedData, setSavedData] = useState<Saved[] | null>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
+  // const [deleteLoading, setDeleteLkoading] = useState<boolean>(false);
 
   const { user } = useAuth();
   // console.log(user);
@@ -156,11 +156,9 @@ const HomePage: FC = () => {
   };
 
   const handleRemoveSaved = async (id: number | undefined) => {
-    setDeleteLoading(true);
     const { error } = await supabase.from("saved").delete().eq("id", id);
     if (!error) {
       toast.success("Saved result has been deleted successfully");
-      setDeleteLoading(false);
     }
   };
 
