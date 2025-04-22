@@ -1,9 +1,34 @@
-function App() {
+import { FC } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import SignInPage from "./pages/SignInPage";
+import Header from "./components/Header";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "sonner";
+const App: FC = () => {
   return (
     <>
-      <h1 className="text-9xl font-bold underline">Hello world, App.tsx!</h1>
+      <Router>
+        <Toaster richColors={true} closeButton={true} position="top-center" />
+        <Header />
+        <main className="mx-4 md:mx-16 py-10">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/signin" element={<SignInPage />} />
+          </Routes>
+        </main>
+      </Router>
     </>
   );
-}
+};
 
 export default App;
